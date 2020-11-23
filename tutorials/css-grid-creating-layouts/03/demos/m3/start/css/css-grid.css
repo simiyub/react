@@ -1,0 +1,13 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 15em auto 15em;
+    grid-template-rows: min-content auto min-content;
+}
+
+header, footer {
+    grid-column: 1 / 4;
+}
