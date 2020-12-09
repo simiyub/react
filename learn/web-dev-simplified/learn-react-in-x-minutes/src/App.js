@@ -31,7 +31,7 @@ useEffect(()=>{
 
   function handleClearTodos(){
     const newTodos = todos.filter(todo =>!todo.complete)
-    setTodos(newTodos)
+    setTodos
   }
 
   function handleAddTodo(e){
