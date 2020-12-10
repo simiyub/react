@@ -62,14 +62,24 @@ function getTurnData(authors){
   }
 }
 const state = {
-  turnData:getTurnData(authors)
+  turnData:getTurnData(authors),
+  highlight:'' 
 }
+
+function onAnswereSelected(answer){
+  const correct = state.turnData.author.books.some((book)=> book === answer);
+  state.highlight = correct ? 'correct' : 'wrong';
+  render(); 
+}
+
+function render() {
 ReactDOM.render(
-    <AuthorQuiz {...state}/>,
+    <AuthorQuiz {...state} onAnswereSelected={onAnswereSelected}/>,
   document.getElementById('root')
 );
-
+}
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+render();
 reportWebVitals();

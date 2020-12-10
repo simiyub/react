@@ -1,7 +1,8 @@
 import logo from './logo.svg';
  import './App.css';
 import './bootstrap.min.css';
-
+import React from 'react';
+import PropTypes from 'prop-types'
 function Hero(){
   return (
   <div className="jumbotron col-10 offset-1">
@@ -11,27 +12,48 @@ function Hero(){
   </div>);
 };
 
-function Book({title}){
+function Book({title, onClick}){
   return(
-    <div className="answer">
+    <div className="answer" onClick={() =>onClick(title)}>
       <h4>{title}</h4>
     </div>
   
   )
 }
-function Turn ({author, books}) {
-return (<div className="row turn" style={{ backgroundColor:"white" }}>
+function Turn ({author, books, highlight, onAnswereSelected }) {
+
+  function highlightToBackgroundColor(highlight) {
+    const mapping = {
+      'none':'',
+      'correct':'green',
+      'wrong':'red'
+    };
+    return mapping[highlight];
+  }
+return (<div className="row turn" style={{ backgroundColor:highlightToBackgroundColor(highlight) }}>
 
   <div className="col-4 offset-1">
 <img src={author.imageUrl} className="authorimage" alt="Author"/>
   </div>
   <div className="col-6">  
-    {books.map((title) => <Book title={title} key={title}/>)}
+    {books.map((title) => <Book title={title} key={title} onClick = {onAnswereSelected}/>)}
     </div>
 
 
   </div>
 )
+
+Turn.propTypes = {
+  author: PropTypes.shapte({
+    name:PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    imageSource: PropTypes.string.isRequired,
+    books: PropTypes.arrayOf(PropTypes.string).isRequired
+  }),
+  books: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onAnswereSelected: PropTypes.func.isRequired,
+  highlight: PropTypes.string.isRequired
+}
 
 };
 function Continue() {
@@ -49,11 +71,11 @@ return (<div id="footer" className="row">
 };
 
 
-function AuthorQuiz({turnData}) {
+function AuthorQuiz({turnData, highlight, onAnswereSelected}) {
   return (
     <div className="container-fluid" >
       <Hero/>
-      <Turn {...turnData }/>
+      <Turn {...turnData} highlight={highlight} onAnswereSelected = {onAnswereSelected}/>
       <Continue/>
       <Footer/>
     </div>
