@@ -66,7 +66,7 @@ const state = {
   highlight:'' 
 }
 
-function onAnswereSelected(answer){
+function onAnswerSelected(answer){
   const correct = state.turnData.author.books.some((book)=> book === answer);
   state.highlight = correct ? 'correct' : 'wrong';
   render(); 
@@ -74,7 +74,7 @@ function onAnswereSelected(answer){
 
 function render() {
 ReactDOM.render(
-    <AuthorQuiz {...state} onAnswereSelected={onAnswereSelected}/>,
+    <AuthorQuiz {...state} onAnswerSelected={onAnswerSelected}/>,
   document.getElementById('root')
 );
 }

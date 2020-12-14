@@ -12,15 +12,15 @@ function Hero(){
   </div>);
 };
 
-function Book({title, onClick}){
+function Book({title, clickHandler}){
   return(
-    <div className="answer" onClick={() =>onClick(title)}>
+    <div className="answer" onClick={() =>{clickHandler(title)}}>
       <h4>{title}</h4>
     </div>
   
-  )
+  );
 }
-function Turn ({author, books, highlight, onAnswereSelected }) {
+function Turn ({author, books, highlight, onAnswerSelected }) {
 
   function highlightToBackgroundColor(highlight) {
     const mapping = {
@@ -30,18 +30,18 @@ function Turn ({author, books, highlight, onAnswereSelected }) {
     };
     return mapping[highlight];
   }
+
+
 return (<div className="row turn" style={{ backgroundColor:highlightToBackgroundColor(highlight) }}>
 
   <div className="col-4 offset-1">
 <img src={author.imageUrl} className="authorimage" alt="Author"/>
   </div>
   <div className="col-6">  
-    {books.map((title) => <Book title={title} key={title} onClick = {onAnswereSelected}/>)}
+    {books.map((title) => <Book title={title} key={title} clickHandler = {onAnswerSelected}/>)}
     </div>
 
-
-  </div>
-)
+  </div>);
 
 Turn.propTypes = {
   author: PropTypes.shapte({
@@ -67,15 +67,15 @@ return (<div id="footer" className="row">
     All images from <a href="http://commons.wikimedia.org/wiki/Main"/>
   </p>
 </div>
-</div >)
-};
+</div >);
+}
 
 
-function AuthorQuiz({turnData, highlight, onAnswereSelected}) {
+function AuthorQuiz({turnData, highlight, onAnswerSelected}) {
   return (
     <div className="container-fluid" >
       <Hero/>
-      <Turn {...turnData} highlight={highlight} onAnswereSelected = {onAnswereSelected}/>
+      <Turn {...turnData} highlight={highlight} onAnswerSelected = {onAnswerSelected}/>
       <Continue/>
       <Footer/>
     </div>
