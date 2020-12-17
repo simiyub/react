@@ -4,7 +4,8 @@ import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import reportWebVitals from './reportWebVitals';
 import {shuffle, sample} from 'underscore';
-import {BrowserRouter, Route } from 'react-router-dom';
+import {BrowserRouter, Route, withRouter } from 'react-router-dom';
+import AddAuthorForm from './AddAuthorForm';
 
 const authors = [
   {
@@ -62,10 +63,14 @@ function getTurnData(authors){
     title === answer))    
   }
 }
-const state = {
-  turnData:getTurnData(authors),
-  highlight:'' 
+
+function resetState(){
+  return {
+    turnData:getTurnData(authors),
+    highlight:'' 
+  };
 }
+let state = resetState();
 
 function onAnswerSelected(answer){
   const correct = state.turnData.author.books.some((book)=> book === answer);
@@ -74,25 +79,31 @@ function onAnswerSelected(answer){
 } 
 
 function App(){
-  return (<AuthorQuiz {...state} onAnswerSelected={onAnswerSelected}/>);
+  return (
+  <AuthorQuiz {...state} 
+  onAnswerSelected={onAnswerSelected} 
+  onContinue={ ()=>{
+    state = resetState();
+    render();
+  }}/>
+
+  );
 }
 
-function AddAuthorForm({match}){
-  return <div>
-    <h1>
-      Add Author
-    </h1>
-    <p>{JSON.stringify(match)} </p>
+const AuthorWrapper = withRouter(({history}) =>
+  <AddAuthorForm onAddAuthor={(author) =>{
+    authors.push(author);
 
-  </div>;
-}
+    history.push('/');
+  }}/>
+) ;
 
 function render() {
 ReactDOM.render(
   <BrowserRouter>
   <React.Fragment>
   <Route exact path="/" component={App}/>
-  <Route path="/add"  component={AddAuthorForm }/>
+  <Route path="/add"  component={AuthorWrapper }/>
   </React.Fragment>
   </BrowserRouter>,    
   document.getElementById('root')
