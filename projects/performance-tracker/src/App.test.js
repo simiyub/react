@@ -5,13 +5,13 @@ import {mount, shallow} from 'enzyme';
 
 describe("Tests for app to check it renders all required modules", ()=>{
 
-  it ("should render App without crashing", ()=>{
+  it ("should render without crashing", ()=>{
     shallow(<App/>);
   })
-  it ("should render Objective without crashing", ()=>{
+  it ("should render performance component without crashing", ()=>{
     const app = mount(<App/>);
-    const objective = app.find("Objective");
-    expect(objective.length).toBe(1);
+    const performance = app.find("Performance");
+    expect(performance.length).toBe(1);
   })
 })
 

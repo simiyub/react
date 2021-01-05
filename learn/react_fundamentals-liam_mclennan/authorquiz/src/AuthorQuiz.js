@@ -3,7 +3,9 @@ import logo from './logo.svg';
 import './bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
 function Hero(){
   return (
   <div className="jumbotron col-10 offset-1">
@@ -45,7 +47,7 @@ return (<div className="row turn" style={{ backgroundColor:highlightToBackground
   </div>);
 
 Turn.propTypes = {
-  author: PropTypes.shapte({
+  author: PropTypes.shape({
     name:PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
     imageSource: PropTypes.string.isRequired,
@@ -78,8 +80,28 @@ return (<div id="footer" className="row">
 </div >);
 }
 
+function mapStateToProps(state) {
+  return{
+    turnData: state.turnData,
+    highlight: state.highlight
+  };
+}
 
-function AuthorQuiz({turnData, highlight, onAnswerSelected, onContinue}) {
+function mapDispatchToProps( dispatch) {
+  return{
+    onAnswerSelected:(answer) =>{
+      dispatch( {type: 'ANSWER_SELECTED', answer});
+  },
+  onContinue: () =>{
+    dispatch({type:'CONTINUE'});  
+}
+  };
+
+}
+
+
+const AuthorQuiz = connect(mapStateToProps, mapDispatchToProps)(
+  function ({turnData, highlight, onAnswerSelected, onContinue}) {
   return (
     <div className="container-fluid" >
       <Hero/>
@@ -89,6 +111,6 @@ function AuthorQuiz({turnData, highlight, onAnswerSelected, onContinue}) {
       <Footer/>
     </div>
   ); 
-}  
+} );
 
 export default AuthorQuiz;

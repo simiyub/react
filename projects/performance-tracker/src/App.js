@@ -1,11 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Objective from './components/objective';
+import Performance from './Performance';
 
 function App() {
   return (
-    <Objective/>
+    <Performance/>
   );
 }
 
