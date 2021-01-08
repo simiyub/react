@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const PerformanceDate = () => {
-    return <div>
+    return <>
         <h4>Date Details here</h4>
         {<div>
             <label>Date</label>
@@ -13,5 +13,5 @@ export const PerformanceDate = () => {
             <label>End</label>
             <input type="time" id="end" name="end"></input>             
          </div>
-    </div>;
+    </>;
 };

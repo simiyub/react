@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "jest-environment-jsdom-fourteen": "^1.0.1"
   }
 }

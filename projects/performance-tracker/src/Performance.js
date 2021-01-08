@@ -5,17 +5,13 @@ import { PerformanceDate } from './PerformanceDate';
 
 const Performance =()=>{
     return(
-        //Use fragment instead of div
-        <div>
-        <div>
-            <PerformanceDate/>
-            <KeyResults/>            
-            </div>
-        <div>
 
-        <Actions/>
-        </div>
-        </div>            
+        <>
+            <PerformanceDate/>
+            <KeyResults/>  
+            <Actions/>                      
+            </>
+            
     );
 
 }

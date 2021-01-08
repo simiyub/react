@@ -13,7 +13,7 @@ export const Actions = () => {
     ]);
 
     return (
-    <div className="ag-theme-alpine" style={{height:400, width:600}}>
+    <div className="ag-theme-alpine" style={{height:400, width:1000}}>
         <h4> A schedule of actions for the day</h4>
         <AgGridReact 
         rowData={rowData}>
